@@ -1,0 +1,36 @@
+{
+  "description": "Close multiple tabs",
+  "manifest_version": 2,
+  "name": "Multi-Tab Close",
+  "version": "0.2",
+  "developer": {
+    "name": "Jaganraj",
+    "url": "https://github.com/j70/multitabx"
+  },
+  "icons": {
+    "96": "icons/icon-54.svg",
+    "48": "icons/icon-54.svg",
+    "32": "icons/icon-54.svg",
+    "16": "icons/icon-54.svg"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Close Tabs",
+    "default_icon": "icons/icon-54.svg"
+  },
+  "short_name": "MultiTabX",
+  "applications": {
+    "gecko": {
+      "id": "multitabx@j70.user.github.com",
+      "strict_min_version": "48.0"
+    }
+  }
+}
