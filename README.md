@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/j70/multitabx/master/icons/icon-54.svg" alt="Multi-Tab Close Logo" height="70" >
+![Logo](https://cdn.rawgit.com/j70/multitabx/master/icons/icon-54.svg)
 
 # Mutli-Tab Close
 
