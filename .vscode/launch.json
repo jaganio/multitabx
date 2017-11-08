@@ -1,0 +1,16 @@
+//launch config for https://github.com/hbenl/vscode-firefox-debug
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach addon",
+            "type": "firefox",
+            "request": "attach",
+            "addonType": "webExtension",
+            "addonPath": "${workspaceFolder}",
+            "reloadOnChange": {
+                "watch": ["${workspaceFolder}/*.js", "${workspaceFolder}/*.html", "${workspaceFolder}/*.json"]
+            }
+        }
+    ]
+}

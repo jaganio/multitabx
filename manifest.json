@@ -2,10 +2,10 @@
   "description": "Close multiple tabs",
   "manifest_version": 2,
   "name": "Multi-Tab Close",
-  "version": "0.3",
+  "version": "0.4",
   "developer": {
-    "name": "Jaganraj",
-    "url": "https://github.com/j70/"
+    "name": "Jagan",
+    "url": "https://github.com/j70/multitabx"
   },
   "icons": {
     "96": "icons/icon-54.svg",
@@ -20,7 +20,8 @@
     "page": "options.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "browser_action": {
     "default_title": "Close Tabs",

@@ -1,38 +1,38 @@
 function closeAll() {
 	var storageItem = browser.storage.local.get("option");
 	storageItem.then((res) => {
-		var option = "allButCur";
-		if (res.option) {
-			option = res.option;
-		}
-		var action = closeAllTabs;
-		var query;
-		switch (option) {
-			case "all":
-				action = closeAllTabs;
-				break;
-
-			case "allButCur":
-				action = closeAllExceptActive;
-				break;
-
-			case "allNew":
-				action = closeAllAndOpenNew;
-				break;
-
-			case "left":
-				action = closeLeftTabs;
-				break;
-
-			case "right":
-				action = closeRightTabs;
-				break;
-		}
-		browser.tabs.query({
-			currentWindow: true,
-			pinned: false
-		}, action);
+		var option = res.option || "allButCur";
+		performAction(option);
 	});
+}
+
+function performAction(option) {
+	var action = closeAllTabs;
+	switch (option) {
+		case "all":
+			action = closeAllTabs;
+			break;
+
+		case "allButCur":
+			action = closeAllExceptActive;
+			break;
+
+		case "allNew":
+			action = closeAllAndOpenNew;
+			break;
+
+		case "left":
+			action = closeLeftTabs;
+			break;
+
+		case "right":
+			action = closeRightTabs;
+			break;
+	}
+	browser.tabs.query({
+		currentWindow: true,
+		pinned: false
+	}, action);
 }
 
 function closeAllExceptActive(tabs) {
@@ -85,4 +85,40 @@ function closeRightTabs(tabs) {
 	browser.tabs.remove(index);
 }
 
+function menuClicked(info, tab) {
+	performAction(info.menuItemId);
+}
+
+browser.contextMenus.create({
+	id: "all",
+	title: "Close All Tabs",
+	contexts: ["all"]
+});
+
+browser.contextMenus.create({
+	id: "allButCur",
+	title: "Close All Tabs Except Current",
+	contexts: ["all"]
+});
+
+browser.contextMenus.create({
+	id: "allNew",
+	title: "Close All Tabs and Open New",
+	contexts: ["all"]
+});
+
+browser.contextMenus.create({
+	id: "right",
+	title: "Close Tabs on the Right",
+	contexts: ["all"]
+});
+
+browser.contextMenus.create({
+	id: "left",
+	title: "Close Tabs on the Left",
+	contexts: ["all"]
+});
+
 browser.browserAction.onClicked.addListener(closeAll);
+
+browser.contextMenus.onClicked.addListener(menuClicked);
