@@ -7,7 +7,6 @@ function closeAll() {
 }
 
 function performAction(option) {
-	var action = closeAllTabs;
 	switch (option) {
 		case "all":
 			action = closeAllTabs;
@@ -36,21 +35,25 @@ function performAction(option) {
 }
 
 function closeAllExceptActive(tabs) {
-	var index = [];
+	var indices = [];
 	for (var tab of tabs) {
 		if (!tab.active) {
-			index.push(tab.id);
+			indices.push(tab.id);
 		}
 	}
-	browser.tabs.remove(index)
+	if (indices.length) {
+		browser.tabs.remove(indices)
+	}
 }
 
 function closeAllTabs(tabs) {
-	var index = [];
+	var indices = [];
 	for (var tab of tabs) {
-		index.push(tab.id);
+		indices.push(tab.id);
 	}
-	browser.tabs.remove(index)
+	if (indices.length) {
+		browser.tabs.remove(indices)
+	}
 }
 
 function closeAllAndOpenNew(tabs) {
@@ -61,28 +64,32 @@ function closeAllAndOpenNew(tabs) {
 }
 
 function closeLeftTabs(tabs) {
-	var index = [];
+	var indices = [];
 	for (var tab of tabs) {
 		if (!tab.active) {
-			index.push(tab.id);
+			indices.push(tab.id);
 		} else {
 			break;
 		}
 	}
-	browser.tabs.remove(index);
+	if (indices.length) {
+		browser.tabs.remove(indices)
+	}
 }
 
 function closeRightTabs(tabs) {
-	var index = [];
+	var indices = [];
 	var rtabs = tabs.reverse()
 	for (var tab of rtabs) {
 		if (!tab.active) {
-			index.push(tab.id);
+			indices.push(tab.id);
 		} else {
 			break;
 		}
 	}
-	browser.tabs.remove(index);
+	if (indices.length) {
+		browser.tabs.remove(indices)
+	}
 }
 
 function menuClicked(info, tab) {
@@ -92,31 +99,31 @@ function menuClicked(info, tab) {
 browser.contextMenus.create({
 	id: "all",
 	title: "Close All Tabs",
-	contexts: ["all"]
+	contexts: ["page", "tab"]
 });
 
 browser.contextMenus.create({
 	id: "allButCur",
-	title: "Close All Tabs Except Current",
-	contexts: ["all"]
+	title: "Close Other Tabs",
+	contexts: ["page", "tab"]
 });
 
 browser.contextMenus.create({
 	id: "allNew",
 	title: "Close All Tabs and Open New",
-	contexts: ["all"]
+	contexts: ["page", "tab"]
 });
 
 browser.contextMenus.create({
 	id: "right",
-	title: "Close Tabs on the Right",
-	contexts: ["all"]
+	title: "Close Tabs to the Right",
+	contexts: ["page", "tab"]
 });
 
 browser.contextMenus.create({
 	id: "left",
-	title: "Close Tabs on the Left",
-	contexts: ["all"]
+	title: "Close Tabs to the Left",
+	contexts: ["page", "tab"]
 });
 
 browser.browserAction.onClicked.addListener(closeAll);
