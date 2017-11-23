@@ -27,6 +27,10 @@ function performAction(option) {
 		case "right":
 			action = closeRightTabs;
 			break;
+
+		case "empty":
+			action = closeAllEmptyTabs;
+			break
 	}
 	browser.tabs.query({
 		currentWindow: true,
@@ -92,6 +96,18 @@ function closeRightTabs(tabs) {
 	}
 }
 
+function closeAllEmptyTabs(tabs) {
+	var indices = [];
+	for (var tab of tabs) {
+		if ((tab.url == "about:home" || tab.url == "about:newtab") && !tab.active) {
+			indices.push(tab.id);
+		}
+	}
+	if (indices.length) {
+		browser.tabs.remove(indices)
+	}
+}
+
 function menuClicked(info, tab) {
 	performAction(info.menuItemId);
 }
@@ -123,6 +139,12 @@ browser.contextMenus.create({
 browser.contextMenus.create({
 	id: "left",
 	title: "Close Tabs to the Left",
+	contexts: ["page", "tab"]
+});
+
+browser.contextMenus.create({
+	id: "empty",
+	title: "Close Empty Tabs",
 	contexts: ["page", "tab"]
 });
 
