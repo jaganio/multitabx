@@ -99,7 +99,7 @@ function closeRightTabs(tabs) {
 function closeAllEmptyTabs(tabs) {
 	var indices = [];
 	for (var tab of tabs) {
-		if ((tab.url == "about:home" || tab.url == "about:newtab") && !tab.active) {
+		if ((tab.url == "about:home" || tab.url == "about:newtab" || tab.url == "about:blank") && !tab.active) {
 			indices.push(tab.id);
 		}
 	}
