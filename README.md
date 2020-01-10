@@ -1,4 +1,4 @@
-![Logo](https://cdn.rawgit.com/j70/multitabx/master/icons/icon-54.svg)
+![Logo](https://raw.githubusercontent.com/jaganio/multitabx/master/icons/icon.svg?sanitize=true)
 
 # Mutli-Tab Close
 
